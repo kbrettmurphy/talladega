@@ -1413,7 +1413,23 @@ function showPage() {
   $("#add-person").hidden = page === "shirts";
   if (page === "messages") scrollThread();
   else window.scrollTo(0, 0);
+  heroVideo(
+    section === "overview" && !document.body.classList.contains("locked"),
+  );
 }
+
+// The Home video loads after sign-in, starts muted (browsers block autoplay
+// with sound), and pauses while another tab is showing.
+function heroVideo(play) {
+  const frame = $("#hero-video");
+  if (play && !frame.src) frame.src = frame.dataset.src;
+  else if (frame.src) ytCommand(play ? "playVideo" : "pauseVideo");
+}
+const ytCommand = (func) =>
+  $("#hero-video").contentWindow?.postMessage(
+    JSON.stringify({ event: "command", func, args: [] }),
+    "*",
+  );
 
 async function switchYear(y, create = false) {
   if (y !== albumYear) clearPhotos();
@@ -1432,6 +1448,7 @@ function lock() {
   token = "";
   localStorage.removeItem("reunion-session");
   document.body.classList.add("locked");
+  heroVideo(false);
   $$("dialog").forEach((d) => d.open && d.close());
   applyTheme();
   $("#login-password").focus();
@@ -1617,6 +1634,13 @@ $("#viewer-delete").onclick = (e) => {
 };
 
 window.addEventListener("hashchange", showPage);
+$("#sound-toggle").addEventListener("click", (e) => {
+  const on = e.currentTarget.getAttribute("aria-pressed") === "false";
+  ytCommand(on ? "unMute" : "mute");
+  if (on) ytCommand("playVideo");
+  e.currentTarget.setAttribute("aria-pressed", on);
+  e.currentTarget.title = on ? "Mute" : "Turn sound on";
+});
 document.addEventListener("visibilitychange", () => {
   if (
     document.visibilityState === "visible" &&

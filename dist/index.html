@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="build" content="2026-10-15.4" />
+    <meta name="build" content="2026-10-18.1" />
     <meta
       name="viewport"
       content="width=device-width,initial-scale=1,viewport-fit=cover"
@@ -23,7 +23,7 @@
           document.documentElement.classList.add("checking");
       } catch (e) {}
     </script>
-    <link rel="stylesheet" href="/style.css?v=2026-10-15.4" />
+    <link rel="stylesheet" href="/style.css?v=2026-10-18.1" />
   </head>
   <body class="locked">
     <section id="login-screen">
@@ -94,20 +94,51 @@
     <main>
       <section id="overview" class="page">
         <div class="hero">
-          <p class="hero-kicker">The annual family pit stop</p>
-          <h1>’Dega, baby.</h1>
-          <div class="hero-count">
-            <strong id="count-number"></strong><span id="count-label"></span>
+          <div>
+            <p class="hero-kicker">The annual family pit stop</p>
+            <h1>’Dega, baby.</h1>
+            <div class="hero-count">
+              <strong id="count-number"></strong><span id="count-label"></span>
+            </div>
+            <p id="hero-dates" class="hero-dates"></p>
+            <button
+              id="hero-action"
+              class="button light"
+              type="button"
+              data-edit-trip
+            >
+              Pick our dates
+            </button>
           </div>
-          <p id="hero-dates" class="hero-dates"></p>
-          <button
-            id="hero-action"
-            class="button light"
-            type="button"
-            data-edit-trip
-          >
-            Pick our dates
-          </button>
+          <div class="hero-video">
+            <div class="hero-video-frame">
+              <iframe
+                id="hero-video"
+                data-src="https://www.youtube.com/embed/rek_Cxrc1pE?autoplay=1&amp;mute=1&amp;playsinline=1&amp;loop=1&amp;playlist=rek_Cxrc1pE&amp;rel=0&amp;enablejsapi=1"
+                title="Eric Church – Talladega (Official Music Video)"
+                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="hero-video-bar">
+              <span>♪ Eric Church — “Talladega”</span>
+              <button
+                id="sound-toggle"
+                class="sound-toggle"
+                type="button"
+                aria-pressed="false"
+                aria-label="Sound"
+                title="Turn sound on"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" />
+                  <path class="wave" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" />
+                  <path class="cross" d="M3 3l18 18" />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
         <div class="columns">
           <div>
@@ -266,6 +297,6 @@
       </div>
     </dialog>
     <div id="toast" popover="manual" role="status" aria-live="polite"></div>
-    <script type="module" src="/app.mjs?v=2026-10-15.4"></script>
+    <script type="module" src="/app.mjs?v=2026-10-18.1"></script>
   </body>
 </html>
