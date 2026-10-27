@@ -1010,7 +1010,7 @@ async function renderWeather() {
   }
   const dates = tripDays(t.start, tripEnd(t)),
     now = today();
-  if (dates[dates.length - 5] < now) {
+  if (dates[dates.length - 1] < now) {
     el.innerHTML = note("This trip is in the memory books.");
     return;
   }
@@ -1022,7 +1022,7 @@ async function renderWeather() {
   try {
     if (!weatherCache || Date.now() - weatherCache.at > 1800000) {
       const r = await fetch(
-        "https://api.open-meteo.com/v1/forecast?latitude=24.7251&longitude=-81.0544&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&timezone=America%2FChicago&forecast_days=16",
+        "https://api.open-meteo.com/v1/forecast?latitude=33.6132&longitude=-86.1183&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=fahrenheit&timezone=America%2FChicago&forecast_days=16",
       );
       if (!r.ok) throw new Error();
       weatherCache = { at: Date.now(), data: (await r.json()).daily };
